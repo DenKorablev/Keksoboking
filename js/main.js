@@ -1,3 +1,5 @@
-import {addAds} from './data.js';
+import './data.js';
+import './form.js';
+import {renderCard} from './card.js';
 
-console.log(addAds());
+renderCard();

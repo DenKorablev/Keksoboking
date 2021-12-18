@@ -11,7 +11,7 @@ const TITLE = [
 ]
 
 const TYPE = [
-  'palace', 'flat', 'house', 'bungalow'
+  'palace', 'flat', 'hotel', 'house', 'bungalow'
 ]
 
 const TIMES = [
@@ -30,7 +30,7 @@ const PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ]
 
-const ADS_COUNT = 10;
+const ADS_COUNT = 8;
 
 export const addAds = () => {
   const ads = [];
@@ -41,7 +41,7 @@ export const addAds = () => {
     }
     const advertisement = {
       author: {
-        avatar: `img/avatars/user${'0' + i}`
+        avatar: `img/avatars/user${'0' + util.makeRandomIntegerGenerator(1, ADS_COUNT)()}.png`
       },
       offer: {
         title: util.getRandomArrayElement(TITLE),
@@ -52,9 +52,9 @@ export const addAds = () => {
         guests: util.getRandomInt(1, 6),
         checkin: util.getRandomArrayElement(TIMES),
         checkout: util.getRandomArrayElement(TIMES),
-        features: FEATURES.slice(util.getRandomInt(1, 5)),
+        features: util.makeRandomArrayGenerator(FEATURES),
         description: util.getRandomArrayElement(DESCRIPTION),
-        photos: PHOTOS.slice(util.getRandomInt(1, 3)),
+        photos: util.makeRandomArrayGenerator(PHOTOS),
       }
     };
     ads.push({...advertisement, location});
