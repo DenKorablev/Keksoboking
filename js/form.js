@@ -15,7 +15,7 @@ const timeIn = adForm.querySelector('select[name=timein]');
 const timeOut = adForm.querySelector('select[name=timeout]');
 const formSubmit = adForm.querySelector('.ad-form__submit');
 const formReset = adForm.querySelector('.ad-form__reset');
-const guestSelectOption = adForm.querySelector('#capacity').children;
+const guestSelectOption = adForm.querySelectorAll('#capacity option');
 
 const setPrice = () => {
   pricePerNight.setAttribute('min', typeHousing[typeFlat.value]);
@@ -37,14 +37,14 @@ const setGuestsAndRooms = () => {
     const guestsValue = parseInt(guestSelectOption[i].value);
 
     if (roomsValue !== 100 && guestsValue === 0) {
-      guestSelectOption[i].style.display = 'none';
+      guestSelectOption[i].remove();
     } else if (roomsValue < guestsValue) {
-      guestSelectOption[i].style.display = 'none';
+      guestSelectOption[i].remove();
     } else if (roomsValue === 100 && guestsValue !== 0) {
-      guestSelectOption[i].style.display = 'none';
+      guestSelectOption[i].remove();
     } else {
       guests.value = guestSelectOption[i].value;
-      guestSelectOption[i].style.display = 'block';
+      guests.appendChild(guestSelectOption[i]);
     }
   }
 };
