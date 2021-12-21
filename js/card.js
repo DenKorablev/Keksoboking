@@ -1,5 +1,3 @@
-import {addAds} from './data.js';
-
 const typeFlatTranslateMap  = {
   'flat': 'Квартира',
   'bungalow': 'Бунгало',
@@ -15,11 +13,6 @@ const cardTemplate = document.querySelector('#card')
 const imgTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup__photo');
-
-const mapCanvas = document.querySelector('#map-canvas');
-
-const ads = addAds();
-const cardListFragments = document.createDocumentFragment();
 
 const insertPhotos = (element, array) => {
   element.innerHTML = '';
@@ -42,22 +35,18 @@ const insertFeatures = (element, array) => {
   });
 };
 
-export const renderCard = () => {
-  ads.forEach(({author, offer}) => {
-    const cardElement = cardTemplate.cloneNode(true);
-    cardElement.querySelector('.popup__title').textContent = offer.title;
-    cardElement.querySelector('.popup__text--address').textContent = offer.address;
-    cardElement.querySelector('.popup__text--price').textContent = `${offer.price}₽/ночь`;
-    cardElement.querySelector('.popup__type').textContent = typeFlatTranslateMap [offer.type];
-    cardElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
-    cardElement.querySelector('.popup__text--time').textContent = `${offer.checkin}, выезд до ${offer.checkout}`;
-    insertFeatures(cardElement.querySelector('.popup__features'), offer.features);
-    cardElement.querySelector('.popup__description').textContent = offer.description;
-    cardElement.querySelector('.popup__avatar').src = author.avatar;
-    insertPhotos(cardElement.querySelector('.popup__photos'), offer.photos);
-    cardListFragments.appendChild(cardElement);
-  });
-
-  mapCanvas.appendChild(cardListFragments);
+export const renderCard = ({author, offer}) => {
+  const cardElement = cardTemplate.cloneNode(true);
+  cardElement.querySelector('.popup__title').textContent = offer.title;
+  cardElement.querySelector('.popup__text--address').textContent = offer.address;
+  cardElement.querySelector('.popup__text--price').textContent = `${offer.price}₽/ночь`;
+  cardElement.querySelector('.popup__type').textContent = typeFlatTranslateMap [offer.type];
+  cardElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
+  cardElement.querySelector('.popup__text--time').textContent = `${offer.checkin}, выезд до ${offer.checkout}`;
+  insertFeatures(cardElement.querySelector('.popup__features'), offer.features);
+  cardElement.querySelector('.popup__description').textContent = offer.description;
+  cardElement.querySelector('.popup__avatar').src = author.avatar;
+  insertPhotos(cardElement.querySelector('.popup__photos'), offer.photos);
+  return cardElement;
 }
 

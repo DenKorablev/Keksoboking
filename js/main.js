@@ -1,5 +1,5 @@
 import './data.js';
 import './form.js';
-import {renderCard} from './card.js';
+import './map.js';
+import './card.js';
 
-renderCard();
