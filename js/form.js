@@ -30,7 +30,7 @@ const setTimeOut = () => {
   timeOut.value = timeIn.value;
 };
 
-const setGuestsAndRooms = () => {
+export const setGuestsAndRooms = () => {
   const roomsValue = parseInt(rooms.value);
 
   for (let i = 0; i < guestSelectOption.length; i++) {
@@ -57,8 +57,7 @@ timeOut.addEventListener('change', setTimeIn)
 
 rooms.addEventListener('change', setGuestsAndRooms)
 
-adForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+adForm.addEventListener('submit', () => {
   formSubmit.textContent = 'Отправка';
   formSubmit.disabled = true;
 });

@@ -1,3 +1,5 @@
+import {setGuestsAndRooms} from './form.js';
+
 const adForm = document.querySelector('.ad-form');
 const adFormFieldsets = document.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -15,4 +17,5 @@ export const setPageActive = () => {
   mapFilters.classList.remove('map__filters--disabled');
   adFormFieldsets.forEach(field => field.removeAttribute('disabled', ''));
   mapFiltersSelects.forEach(field => field.removeAttribute('disabled', ''));
+  setGuestsAndRooms();
 };
