@@ -72,8 +72,7 @@ adForm.addEventListener('submit', (evt) => {
 
   sendData(
     () => {
-      showSuccess();
-      defaultForm();
+      showSuccess(defaultForm);
       adForm.reset();
     },
     () => {

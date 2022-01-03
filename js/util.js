@@ -59,13 +59,14 @@ export const makeRandomArrayGenerator = (array) => {
   return result.sort();
 };
 
-export const showSuccess = () => {
+export const showSuccess = (onSuccess) => {
   const container = successTemplate.cloneNode(true);
 
   document.body.append(container);
 
   setTimeout(() => {
     container.remove();
+    onSuccess();
   }, ALERT_SHOW_TIME);
 };
 
