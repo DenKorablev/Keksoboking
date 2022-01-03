@@ -7,27 +7,27 @@ const TITLE = [
   'Любовное гнездышко',
   'Харомы',
   'Хрущевка',
-  'Дворец'
+  'Дворец',
 ]
 
 const TYPE = [
-  'palace', 'flat', 'hotel', 'house', 'bungalow'
+  'palace', 'flat', 'hotel', 'house', 'bungalow',
 ]
 
 const TIMES = [
-  '12:00', '13:00', '14:00'
+  '12:00', '13:00', '14:00',
 ]
 
 const FEATURES = [
-  'wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'
+  'wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner',
 ]
 
 const DESCRIPTION = [
-  'Красот', 'Просто и со вкусом', 'Для котиков'
+  'Красот', 'Просто и со вкусом', 'Для котиков',
 ]
 
 const PHOTOS = [
-  'http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
+  'http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ]
 
 const ADS_COUNT = 8;
@@ -37,11 +37,11 @@ export const addAds = () => {
   for (let i = 0; i < ADS_COUNT; i++) {
     const location = {
       x: util.getRandomFloat(35.65000, 35.70000, 5),
-      y: util.getRandomFloat(139.70000, 139.80000, 5)
+      y: util.getRandomFloat(139.70000, 139.80000, 5),
     }
     const advertisement = {
       author: {
-        avatar: `img/avatars/user${'0' + util.makeRandomIntegerGenerator(1, ADS_COUNT)()}.png`
+        avatar: `img/avatars/user${'0' + util.makeRandomIntegerGenerator(1, ADS_COUNT)()}.png`,
       },
       offer: {
         title: util.getRandomArrayElement(TITLE),
@@ -55,7 +55,7 @@ export const addAds = () => {
         features: util.makeRandomArrayGenerator(FEATURES),
         description: util.getRandomArrayElement(DESCRIPTION),
         photos: util.makeRandomArrayGenerator(PHOTOS),
-      }
+      },
     };
     ads.push({...advertisement, location});
   }

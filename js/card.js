@@ -3,7 +3,7 @@ const typeFlatTranslateMap  = {
   'bungalow': 'Бунгало',
   'hotel': 'Отель',
   'house': 'Дом',
-  'palace': 'Дворец'
+  'palace': 'Дворец',
 };
 
 const cardTemplate = document.querySelector('#card')

@@ -1,9 +1,12 @@
+import { showAlert, showSuccess } from './util.js';
+import { sendData } from './api.js';
+
 const typeHousing  = {
   'bungalow': '0',
   'flat': '1000',
   'hotel': '3000',
   'house': '5000',
-  'palace': '10000'
+  'palace': '10000',
 };
 
 const adForm = document.querySelector('.ad-form');
@@ -29,6 +32,11 @@ const setTimeIn = () => {
 const setTimeOut = () => {
   timeOut.value = timeIn.value;
 };
+
+const defaultForm = () => {
+  formSubmit.textContent = 'Опубликовать';
+  formSubmit.disabled = false;
+}
 
 export const setGuestsAndRooms = () => {
   const roomsValue = parseInt(rooms.value);
@@ -57,14 +65,27 @@ timeOut.addEventListener('change', setTimeIn)
 
 rooms.addEventListener('change', setGuestsAndRooms)
 
-adForm.addEventListener('submit', () => {
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
   formSubmit.textContent = 'Отправка';
   formSubmit.disabled = true;
+
+  sendData(
+    () => {
+      showSuccess();
+      defaultForm();
+      adForm.reset();
+    },
+    () => {
+      showAlert('Не удалось отправить форму');
+      defaultForm();
+    },
+    new FormData(evt.target),
+  );
 });
 
 formReset.addEventListener('click', (evt) => {
   evt.preventDefault();
-  formSubmit.textContent = 'Опубликовать';
-  formSubmit.disabled = false;
+  defaultForm();
   adForm.reset();
 });

@@ -2,11 +2,11 @@ import {setPageActive, setPageNotActive} from './load.js';
 import {addAds} from './data.js';
 import {renderCard} from './card.js';
 
-/* setPageNotActive(); */  //sssssssssssssssssssssss
+setPageNotActive();
 
 const START_POSITION = {
   LAT: 35.6895,
-  LNG: 139.69171
+  LNG: 139.69171,
 }
 
 const ads = addAds();
