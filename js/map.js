@@ -1,5 +1,4 @@
 import {setPageActive, setPageNotActive} from './load.js';
-import {addAds} from './data.js';
 import {renderCard} from './card.js';
 
 setPageNotActive();
@@ -9,7 +8,6 @@ const START_POSITION = {
   LNG: 139.69171,
 }
 
-const ads = addAds();
 const address = document.querySelector('#address');
 
 const map = L.map('map-canvas')
@@ -20,7 +18,7 @@ const map = L.map('map-canvas')
   .setView({
     lat: START_POSITION.LAT,
     lng: START_POSITION.LNG,
-  }, 11);
+  }, 12);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -53,25 +51,31 @@ mainPinMarker.on('moveend', (evt) => {
   address.value = `lat: ${position.lat.toFixed(5)}, lng: ${position.lng.toFixed(5)}`
 })
 
-ads.forEach((object) => {
-  const icon = L.icon({
-    iconUrl: './img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
+export const renderAds = (ads) => {
+  if (ads) {
+    ads.forEach(({author, offer, location}) => {
 
-  const marker = L.marker({
-    lat: object.location.x,
-    lng: object.location.y,
-  },
-  {
-    icon,
-  });
-
-  marker
-    .addTo(map)
-    .bindPopup(renderCard(object),
-      {
-        keepInView: true,
+      const icon = L.icon({
+        iconUrl: './img/pin.svg',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
       });
-});
+
+      const marker = L.marker({
+        lat: location.lat,
+        lng: location.lng,
+      },
+      {
+        icon,
+      },
+      );
+
+      marker
+        .addTo(map)
+        .bindPopup(renderCard(author, offer),
+          {
+            keepInView: true,
+          });
+    });
+  }
+};

@@ -6,6 +6,7 @@ const successTemplate = document.querySelector('#success')
   .content
   .querySelector('.success');
 
+export const ADS_COUNT = 10;
 export const getRandomInt = (min, max) => {
   if (min < 0 || max < 0) return -1;
 
