@@ -51,6 +51,8 @@ mainPinMarker.on('moveend', (evt) => {
   address.value = `lat: ${position.lat.toFixed(5)}, lng: ${position.lng.toFixed(5)}`
 })
 
+const markerGroup = L.layerGroup().addTo(map);
+
 export const renderAds = (ads) => {
   if (ads) {
     ads.forEach(({author, offer, location}) => {
@@ -71,7 +73,7 @@ export const renderAds = (ads) => {
       );
 
       marker
-        .addTo(map)
+        .addTo(markerGroup)
         .bindPopup(renderCard(author, offer),
           {
             keepInView: true,
@@ -79,3 +81,7 @@ export const renderAds = (ads) => {
     });
   }
 };
+
+export const clearLayers = () => {
+  markerGroup.clearLayers();
+}

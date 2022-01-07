@@ -80,3 +80,11 @@ export const showAlert = (message) => {
 
   document.body.append(container);
 };
+
+export const debounce = (cb, delay) => {
+  let timeout;
+  return (...data) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => cb.apply(this, data), delay);
+  }
+}
