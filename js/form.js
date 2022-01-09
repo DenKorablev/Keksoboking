@@ -1,3 +1,4 @@
+import { mainPinMarker } from './map.js';
 import { showAlert, showSuccess } from './util.js';
 import { sendData } from './api.js';
 
@@ -19,6 +20,13 @@ const timeOut = adForm.querySelector('select[name=timeout]');
 const formSubmit = adForm.querySelector('.ad-form__submit');
 const formReset = adForm.querySelector('.ad-form__reset');
 const guestSelectOption = adForm.querySelectorAll('#capacity option');
+const address = document.querySelector('#address');
+
+const avatarChooser = adForm.querySelector('.ad-form__field');
+const avatar = adForm.querySelector('.ad-form-header__preview img');
+
+const housingPhotosChooser = adForm.querySelector('.ad-form__upload');
+const housingPhotos = adForm.querySelector('.ad-form__photo');
 
 const setPrice = () => {
   pricePerNight.setAttribute('min', typeHousing[typeFlat.value]);
@@ -36,7 +44,14 @@ const setTimeOut = () => {
 const defaultForm = () => {
   formSubmit.textContent = 'Опубликовать';
   formSubmit.disabled = false;
-}
+};
+
+const defaultFieldValue = () => {
+  const {lat, lng } = mainPinMarker.getLatLng()
+  avatar.src = 'img/muffin-grey.svg';
+  housingPhotos.style = '';
+  address.value = `lat: ${lat.toFixed(5)}, lng: ${lng.toFixed(5)}`;
+};
 
 export const setGuestsAndRooms = () => {
   const roomsValue = parseInt(rooms.value);
@@ -74,6 +89,7 @@ adForm.addEventListener('submit', (evt) => {
     () => {
       showSuccess(defaultForm);
       adForm.reset();
+      defaultFieldValue();
     },
     () => {
       showAlert('Не удалось отправить форму');
@@ -87,4 +103,28 @@ formReset.addEventListener('click', (evt) => {
   evt.preventDefault();
   defaultForm();
   adForm.reset();
+  defaultFieldValue();
 });
+
+avatarChooser.addEventListener('change', (evt) => {
+  const file = evt.target.files[0];
+  const reader = new FileReader(file);
+  reader.addEventListener('load', () => {
+    avatar.src = reader.result;
+  });
+
+  reader.readAsDataURL(file);
+})
+
+housingPhotosChooser.addEventListener('change', (evt) => {
+  const file = evt.target.files[0];
+  const reader = new FileReader(file);
+  reader.addEventListener('load', () => {
+    housingPhotos.style.backgroundImage = `url(${reader.result})`;
+    housingPhotos.style.backgroundRepeat = 'no-repeat';
+    housingPhotos.style.backgroundSize = 'contain';
+    housingPhotos.style.backgroundPosition = 'center';
+  });
+
+  reader.readAsDataURL(file);
+})

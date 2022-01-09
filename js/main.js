@@ -1,5 +1,4 @@
 import './data.js';
-import './form.js';
 import { renderAds } from './map.js';
 import { getData } from './api.js';
 import { ADS_COUNT, debounce } from './util.js';

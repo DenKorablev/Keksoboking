@@ -33,7 +33,7 @@ const mainPinIcon = L.icon({
   iconAnchor: [26, 52],
 });
 
-const mainPinMarker = L.marker(
+export const mainPinMarker = L.marker(
   {
     lat: 35.6895,
     lng: 139.69171,
